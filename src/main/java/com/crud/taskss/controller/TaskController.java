@@ -1,6 +1,9 @@
 package com.crud.taskss.controller;
 
 import com.crud.taskss.domain.TaskDto;
+import com.crud.taskss.mapper.TaskMapper;
+import com.crud.taskss.service.DbService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +15,19 @@ import java.util.List;
 @RequestMapping("/v1/task")
 public class TaskController {
 
+    @Autowired
+    private DbService dbService;
+    @Autowired
+    private TaskMapper taskMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
     public List<TaskDto> getTasks() {
-        return new ArrayList<>();
+        return taskMapper.mapToTaskDtoList(dbService.getAllTasks());
     }
     @RequestMapping(method = RequestMethod.GET, value = "getTask")
     public TaskDto getTask(Long taskId) {
-        return new TaskDto(1L, "test title", "test_content");
+        return taskMapper.mapToTaskDto(dbService.getTask((long)1));
+      //  return new TaskDto(1L, "test title", "test_content");
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
     public void deleteTask(Long taskId) {
