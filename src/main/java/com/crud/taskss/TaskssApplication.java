@@ -12,9 +12,9 @@ public class TaskssApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(TaskssApplication.class, args);
 	}
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//		return application.sources(TaskssApplication.class);
-//	}
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(TaskssApplication.class);
+	}
 
 }
