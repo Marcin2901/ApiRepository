@@ -3,11 +3,9 @@ package com.crud.taskss.controller;
 import com.crud.taskss.domain.TaskDto;
 import com.crud.taskss.mapper.TaskMapper;
 import com.crud.taskss.service.DbService;
-import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
