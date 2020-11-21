@@ -7,15 +7,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-//@Getter
-//@AllArgsConstructor
-//@NoArgsConstructor
-//public class TrelloCardDto {
-//
-//    private String name;
-//    private String description;
-//    private String pos;
-//    private String idList;
-//
-//
-//}
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TrelloCardDto {
+
+    private String name;
+    private String description;
+    private String pos;
+    private String idList;
+
+
+}

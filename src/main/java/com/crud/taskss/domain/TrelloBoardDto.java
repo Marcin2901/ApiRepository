@@ -9,19 +9,19 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Optional;
 
-//@Getter
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@JsonIgnoreProperties(ignoreUnknown = true)
-//public class TrelloBoardDto {
-//    @JsonProperty("name")
-//    private String name;
-//    @JsonProperty("id")
-//    private String id;
-//    @JsonProperty("lists")
-//    private List<TrelloListDto> lists;
-//
-//    public Optional<String> optional (String name) {
-//        return Optional.ofNullable(name);
-//    }
-//}
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TrelloBoardDto {
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("lists")
+    private List<TrelloListDto> lists;
+
+    public Optional<String> optional (String name) {
+        return Optional.ofNullable(name);
+    }
+}
