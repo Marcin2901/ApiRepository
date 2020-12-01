@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TrelloMapperTest {
+//public class TrelloMapperTest {
 //    @Autowired
 //    private TrelloService trelloService;
 //
@@ -21,8 +21,8 @@ public class TrelloMapperTest {
 //
 //    @Autowired
 //    private TrelloValidator trelloValidator;
-    @Test
-    public void testMapToBoard() {
+//    @Test
+//    public void testMapToBoard() {
 //        TrelloBoardDto[] trelloBoards = new TrelloBoardDto[3];
 //        trelloBoards[0] = new TrelloBoardDto("test_id_1", "test_board_1", new ArrayList<>());
 //        trelloBoards[1] = new TrelloBoardDto("test_id_2", "test_board_2", new ArrayList<>());
@@ -32,5 +32,5 @@ public class TrelloMapperTest {
 //
 //        Assert.assertEquals(3,trelloBoardList.size());
 
-    }
-}
+//    }
+//}
