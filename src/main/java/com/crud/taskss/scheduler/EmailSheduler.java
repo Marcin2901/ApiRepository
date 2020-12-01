@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+//19.4
 @Component
 public class EmailSheduler {
     private final static String SUBJECT = "Tasks: Once a day email";
@@ -20,8 +21,8 @@ public class EmailSheduler {
     @Autowired
     AdminConfig adminConfig;
 
-    @Scheduled //(cron = "0 0 10 * * *")
-            (fixedDelay = 10000)
+    @Scheduled (cron = "0 0 10 * * *")
+          //  (fixedDelay = 10000)
     public void sendInformationEmail() {
         long size = taskRepository.count();
         if(size == 1) {
