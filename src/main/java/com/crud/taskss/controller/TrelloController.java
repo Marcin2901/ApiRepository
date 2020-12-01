@@ -1,11 +1,18 @@
 package com.crud.taskss.controller;
 
-import com.crud.taskss.domain.CreatedTrelloCard;
+//import com.crud.taskss.domain.CreatedTrelloCardDto;
+//import com.crud.taskss.domain.TrelloBoardDto;
+//import com.crud.taskss.domain.TrelloCardDto;
+//import com.crud.taskss.service.TrelloService;
+//import com.crud.taskss.trello.client.TrelloClient;
+//import com.crud.taskss.trello.facade.TrelloFacade;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.converter.json.GsonBuilderUtils;
+import com.crud.taskss.domain.CreatedTrelloCardDto;
 import com.crud.taskss.domain.TrelloBoardDto;
 import com.crud.taskss.domain.TrelloCardDto;
 import com.crud.taskss.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,30 +24,23 @@ import java.util.List;
 public class TrelloController {
 
     @Autowired
-    private TrelloClient trelloClient;
+    TrelloClient trelloClient;
+//    @Autowired
+//    private TrelloFacade trelloFacade;
+//
+//    @RequestMapping(method = RequestMethod.GET, value = "/getTrelloBoards")
+//    public List<TrelloBoardDto> getTrelloBoards() {
+//        return trelloFacade.fetchTrelloBoards();
+//    }
+//
+    @RequestMapping(method = RequestMethod.POST, value ="createTrelloCard")
+    public CreatedTrelloCardDto createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+    //   return trelloFacade.createCard(trelloCardDto)
+        return trelloClient.createNewCard(trelloCardDto);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
         return trelloClient.getTrelloBoards();
-//        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-//
-//       trelloBoards.stream()
-//               .filter(s -> s.optional(s.getId()).isPresent())
-//               .filter(s -> s.optional(s.getName()).isPresent())
-//                .filter(s -> s.getName().contains("Kodilla"))
-//                .forEach(s -> {
-//                    System.out.println(s.getId() + " - " + s.getName());
-//                    System.out.println("This board contains lists: ");
-//
-//                    s.getLists().forEach(trelloList ->
-//                            System.out.println(trelloList.getName() + " - " + trelloList.getId() + " " + trelloList.isClosed()));
-//                });
-
-    }
-    @RequestMapping(method = RequestMethod.POST, value ="createTrelloCard")
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-
-        return trelloClient.createNewCard(trelloCardDto);
-    }
-
+}
 }

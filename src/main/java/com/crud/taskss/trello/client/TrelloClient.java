@@ -2,7 +2,27 @@ package com.crud.taskss.trello.client;
 
 
 
-import com.crud.taskss.domain.CreatedTrelloCard;
+//import com.crud.taskss.domain.CreatedTrelloCardDto;
+//import com.crud.taskss.domain.TrelloBoardDto;
+//import com.crud.taskss.domain.TrelloCardDto;
+//import com.crud.taskss.trello.config.TrelloConfig;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
+//import org.springframework.web.client.RestClientException;
+//import org.springframework.web.client.RestTemplate;
+////import org.springframework.web.util.UriComponents;
+//import org.springframework.web.util.UriComponentsBuilder;
+//
+//import java.net.URI;
+//import java.util.ArrayList;
+//import java.util.Arrays;
+//import java.util.List;
+//import java.util.Optional;
+
+
+import com.crud.taskss.domain.CreatedTrelloCardDto;
 import com.crud.taskss.domain.TrelloBoardDto;
 import com.crud.taskss.domain.TrelloCardDto;
 import com.crud.taskss.trello.config.TrelloConfig;
@@ -13,19 +33,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-//import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Optional;
-
-
 
 import static java.util.Optional.ofNullable;
 
+//
+//import static java.util.Optional.ofNullable;
+//
 @Component
 public class TrelloClient {
 
@@ -38,9 +57,16 @@ public class TrelloClient {
     @Autowired
     private RestTemplate restTemplate;
 
+
+
     public List<TrelloBoardDto> getTrelloBoards() {
 
-        URI url = getUrl();
+        URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/marcinjaworski25/boards")
+                .queryParam("key", trelloConfig.getTrelloAppKey())
+                .queryParam("token", trelloConfig.getTrelloToken())
+                .queryParam("fields", "name,id")
+                .queryParam("lists", "all").build().encode().toUri();
+
         try {
             TrelloBoardDto[] boardsResponce = restTemplate.getForObject(url, TrelloBoardDto[].class);
             return Arrays.asList(ofNullable(boardsResponce).orElse(new TrelloBoardDto[0]));
@@ -49,34 +75,21 @@ public class TrelloClient {
             LOGGER.error(e.getMessage(), e);
             return new ArrayList<>();
         }
-//        if(boardsResponce != null) {
-//            return Arrays.asList(boardsResponce);
-//        }
-//        return new ArrayList<>();
-    }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+     }
+
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
+
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("name", trelloCardDto.getName())
                 .queryParam("desc", trelloCardDto.getDescription())
                 .queryParam("pos", trelloCardDto.getPos())
-                .queryParam("idList", trelloCardDto.getIdList())
+                .queryParam("idList", trelloCardDto.getListId())
                 .build().encode().toUri();
 
-        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
-
-
-    private URI getUrl() {
-        return UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/marcinjaworski25/boards")
-                .queryParam("key", trelloConfig.getTrelloAppKey())
-                .queryParam("token", trelloConfig.getTrelloToken())
-                .queryParam("fields","name,id")
-                .queryParam("lists", "all")
-                .build().encode().toUri();
-    }
-
 
 }
